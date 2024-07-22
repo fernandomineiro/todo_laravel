@@ -41,7 +41,7 @@
                             <form action="{{ route('tasks.complete', $task->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="btn btn-success">Completo</button>
+                                <button type="submit" class="btn btn-success">Completar</button>
                             </form>
                         @endif
                     </td>
