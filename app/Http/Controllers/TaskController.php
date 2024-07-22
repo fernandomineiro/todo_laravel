@@ -86,7 +86,7 @@ class TaskController extends Controller
    
        public function markAsCompleted(Task $task)
        {
-           $this->authorize('update', $task);
+        $tasks = auth()->user()->tasks;
            $task->completed = true;
            $task->save();
    
