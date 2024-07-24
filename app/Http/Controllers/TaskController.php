@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -15,6 +16,11 @@ class TaskController extends Controller
        public function index()
        {
            $tasks = auth()->user()->tasks;
+           $log = new Log();
+           $log->user_id = auth()->id();
+           $log->action = "listar";
+
+           $log->save();
            return view('tasks.index', compact('tasks'));
        }
    
@@ -41,6 +47,12 @@ class TaskController extends Controller
            }
    
            $task->user_id = auth()->id();
+
+           $log = new Log();
+           $log->user_id = auth()->id();
+           $log->action = "criar";
+
+           $log->save();
            $task->save();
    
            return redirect()->route('tasks.index')->with('success', 'Task criada com successo.');
@@ -69,6 +81,12 @@ class TaskController extends Controller
                $path = $request->file('image')->store('tasks', 'public');
                $task->image = $path;
            }
+
+           $log = new Log();
+           $log->user_id = auth()->id();
+           $log->action = "editar";
+
+           $log->save();
    
            $task->save();
    
@@ -79,6 +97,11 @@ class TaskController extends Controller
        {
         //    $this->authorize('delete', $task);
         $tasks = auth()->user()->tasks;
+        $log = new Log();
+        $log->user_id = auth()->id();
+        $log->action = "deletar";
+
+        $log->save();
            $task->delete();
    
            return redirect()->route('tasks.index')->with('success', 'Task deletada com sucesso.');
@@ -88,6 +111,11 @@ class TaskController extends Controller
        {
         $tasks = auth()->user()->tasks;
            $task->completed = true;
+           $log = new Log();
+           $log->user_id = auth()->id();
+           $log->action = "completar";
+
+           $log->save();
            $task->save();
    
            // Enviar e-mail de notificação (opcional)

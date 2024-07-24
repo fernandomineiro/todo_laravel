@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LogController;
+
 
 
 Route::get('/', function () {
@@ -10,10 +13,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('/logs', [LogController::class, 'index'])->name('logs.index');;
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
     Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
     Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
