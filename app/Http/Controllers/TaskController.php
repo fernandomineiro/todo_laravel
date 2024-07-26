@@ -118,6 +118,7 @@ class TaskController extends Controller
            $log->save();
            $task->save();
    
+           
            // Enviar e-mail de notificação (opcional)
            // ...
    

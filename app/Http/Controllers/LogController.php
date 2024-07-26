@@ -10,10 +10,11 @@ class LogController extends Controller
 {
     public function index()
     {
-        // Buscar todos os logs
-        if (Auth::check() && Auth::user()->role === 'admin') {
-        $logs = Log::with('user')->get(); // Usa a relação definida no modelo
+
+        if (Auth::check() && Auth::user()->role_id === 1) {
+        $logs = Log::with('user')->get(); 
  
+        echo $logs;
         return view('logs.index', compact('logs'));
     }
 

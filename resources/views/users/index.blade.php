@@ -18,11 +18,11 @@
         </thead> 
         <tbody>
             @forelse($users as $user)
-                <tr>
-                    <td>{{ $user->name}}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->role }}</td>
-                </tr>
+            <tr>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->role }}</td>
+                        </tr>
             @empty
                 <tr>
                     <td colspan="5">Nenhuma usuário encontrada.</td>
