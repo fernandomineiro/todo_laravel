@@ -19,7 +19,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::middleware(['auth'])->group(function () {
-
+ 
     Route::get('/logs', [LogController::class, 'index'])->name('logs.index');;
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');

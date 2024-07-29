@@ -43,7 +43,7 @@ class TaskController extends Controller
    
            if ($request->hasFile('image')) {
                $path = $request->file('image')->store('tasks', 'public');
-               $task->image = $path;
+               $task->image =  $path;
            }
    
            $task->user_id = auth()->id();
@@ -66,7 +66,7 @@ class TaskController extends Controller
    
        public function update(Request $request, Task $task)
        {
-           $this->authorize('update', $task);
+        //    $this->authorize('update', $task);
    
            $request->validate([
                'title' => 'required|string|max:255',
